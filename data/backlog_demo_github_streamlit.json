@@ -1,0 +1,420 @@
+[
+  {
+    "id": 904,
+    "titre": "Let file_uploader return path, instead of reading the file in",
+    "description": "Thanks for implementing the file_uploader widget, I was really looking forward for that.\n\n### Problem\n\nMy issue is that I expect large files (up to GBs), and thus reading them directly into memory is not acceptable for me. \n\n### Solution\n\n**separate file_picker** One option would be to implement it as a separate widget (e.g. file_picker), which would just help to locate the file without uploading it.\n\n**optional upload** Other possibility that comes to my mind would be an option (e.g. upload=False), that would allow me to choose not to upload the file. String with absolute path would be returned instead.\n\nAlso as mentioned in other issues, even if I could work with the file itself, I'd still need it's path, name, suffix etc. to work with.\n\n**URL** Maybe in the future, but it would be really nice if the widget could also accept an URL.\n\nThanks in advance for considering the changes.\n\n---\n\nCommunity voting on feature requests enables the Streamlit team to understand which features are most important to our users.\n\n**If you'd like the Streamlit team to prioritize this feature request, please use the 👍 (thumbs up emoji) reaction in response to the initial post.**\n\n![Views](https://api",
+    "url": "https://github.com/streamlit/streamlit/issues/904",
+    "reactions": 201,
+    "commentaires": 89,
+    "labels": [
+      "type:enhancement",
+      "feature:st.file_uploader",
+      "status:likely"
+    ],
+    "cree_le": "2020-01-01"
+  },
+  {
+    "id": 1980,
+    "titre": "2nd Sidebar (on right side)",
+    "description": "### Problem\n\nA neat app often elucidates complex problems. Hence there is often a lot to explain to carry details about the app itself, its backgrounds and further details - especially for public apps. Currently, the little space in the sidebar and main window quickly get filled with explanations and further links. I have written long markdown documents one can hide, but still, either people quickly uncheck the box to head for the box or get overwhelmed with details. Eventually, a good app is not used because of a cluttered layout, long scrolling and still insufficient clarity.\n\n### Solution\n\n**MVP:** A 2nd sidebar on the right side could be a nice designated place for such instructions, background information etc. It would save a lot of real estate in the other sections and still provide novice users with guidance without distracting frequent users. Moreover I consider it rather simple to copy the class from the existing sidebar - just as a right-bound counterpart.\n\n**Possible additions:** Another option cold be an annotation overlay for all controls.\n\n**Preferred solution:** I prefer the simple and straight forward solution\n\n### Additional context\n\nThanks so much and many cheers.",
+    "url": "https://github.com/streamlit/streamlit/issues/1980",
+    "reactions": 47,
+    "commentaires": 67,
+    "labels": [
+      "type:enhancement",
+      "area:layout"
+    ],
+    "cree_le": "2020-09-08"
+  },
+  {
+    "id": 611,
+    "titre": "Export to standalone HTML file",
+    "description": "there are a lot of BI and report tools out there, but all have the same issue, there is no easy way to share a report, usually we end up sending pdf or excel export.\n\nI know streamlit will have a paid service to easily share the report, that's fair, they need to pay the bill too, it is very useful if the data is from a live database\n\nI think it will be really a killer feature for streamlit to have an option to generate a standalone HTML file that any one can consume, you can even send it by email, Kepler.gl and sanddance already do that.\n\n---\n\nCommunity voting on feature requests enables the Streamlit team to understand which features are most important to our users.\n\n**If you'd like the Streamlit team to prioritize this feature request, please use the 👍 (thumbs up emoji) reaction in response to the initial post.**\n\n![Views](https://api.views-badge.org/badge/st-issue-611)",
+    "url": "https://github.com/streamlit/streamlit/issues/611",
+    "reactions": 285,
+    "commentaires": 65,
+    "labels": [
+      "type:enhancement",
+      "status:unlikely",
+      "area:utilities"
+    ],
+    "cree_le": "2019-11-03"
+  },
+  {
+    "id": 1370,
+    "titre": "Make Streamlit easy to deploy as a standalone executable (e.g. PyInstaller, Electron)",
+    "description": "Is there a future for electron deployment of streamlit?\n___\n\n```\nstreamlit electron app.py\n```\n\nStreamlits target demographic (seemingly the Data Science / ML / AI community) often has apps which consume *a lot* of resources. RAM for loading data used by the app can be quite a bit- pair this with `st.cache` and in a few hours/days time your streamlit app needs to be killed / controlled / scaled. That is fine (and good for AWS' profit), but why not be able to distribute the app across its users so they can run it on their machine (and use their resources).  This is easy enough if your streamlit users are capable of running `streamlit run ..` in their terminal. However, *who are the users of these apps*? Oftentimes they will be other engineers / programmers sure - but I think a substantial chunk of the user-base of streamlit apps is a non-technical audience. We send links to streamlit apps to management / non-technical members of the organization *constantly* I would much rather send them an `S3` link to download an electron app and not worry about scaling up the AWS instance(s) hosting it. Sure, they have to have python and some dependencies - but those are relatively easy to contro",
+    "url": "https://github.com/streamlit/streamlit/issues/1370",
+    "reactions": 94,
+    "commentaires": 38,
+    "labels": [
+      "type:enhancement",
+      "area:deployment",
+      "status:unlikely"
+    ],
+    "cree_le": "2020-04-21"
+  },
+  {
+    "id": 4173,
+    "titre": "st.file_uploader returns HTTP code 400 with invalid session_id when deployed on Kubernetes",
+    "description": "### Summary\n\nIn my Streamlit app deployed in a standalone Docker container, local files can be uploaded via **st.file_uploader** without any problems. However, for the same app deployed on Kubernetes cluster in multiple replicas setting, st.file_uploader randomly returns HTTP status code 400 with an error message like: \n\n_**400: Invalid session_id: '1d319bd4-b1dc-4149-bfb2-24cdd48f3982'**_\n\n![obraz](https://user-images.githubusercontent.com/7476899/145990286-42a04de9-298a-40ff-a2a7-fd6e9f31fac2.png)\n\nThe behaviour is non-deterministic - reloading (sometimes more than once) the browser tab helps.\n\n### Steps to reproduce\n\n- Deploy a Streamlit app on Kubernetes with multiple replicas\n- Run the app in a browser\n- Select any file in st.file_uploader's window.\n- If the error doesn't occur, reload the browser tab and try again.\n\nCode snippet:\n\n```\nst.file_uploader(\"Choose a file\")\n```\n\n**Expected behavior:**\n\nst.file_uploader works exactly the same way in a single Docker container and when deployed on Kubernetes cluster with multiple replicas.\n\n### Debug info\n\n- Streamlit version: 1.0.0\n- Python version: 3.7.8\n- continuumio/miniconda3:4.9.2 Docker image\n\n### Additional information\n\nThe pr",
+    "url": "https://github.com/streamlit/streamlit/issues/4173",
+    "reactions": 42,
+    "commentaires": 36,
+    "labels": [
+      "type:enhancement",
+      "feature:st.file_uploader",
+      "area:deployment"
+    ],
+    "cree_le": "2021-12-14"
+  },
+  {
+    "id": 1326,
+    "titre": "Improve \"missing ScriptRunContext\" threading error",
+    "description": "If you create a thread from your Streamlit script, and call streamlit functions from within that thread, you need to attach a `ReportContext` to it or else your `st.foo()` calls won't do anything, and you'll get a warning message that looks something like this:\n\n“Thread ‘Thread-7’: missing ReportContext”\n\nWe should improve the error message to tell the user how to fix this! (We may just want an FAQ entry that we can link to from the error message.)\n\n(The fix is to use `add_report_ctx` on the thread immediately after it's created:)\n\n```python\nfrom streamlit.ReportThread import add_report_ctx\n\nthread = threading.Thread(target=...)\nadd_report_ctx(thread)\nthread.start()\n```\n\nRelated discussion: https://discuss.streamlit.io/t/how-to-run-a-subprocess-programs-using-thread-inside-streamlit/2440\n\n(2022 edit: please see my comments [here](https://github.com/streamlit/streamlit/issues/1326#issuecomment-1024399877) - this is an internal Streamlit API and has some major caveats. In particular, please *do not* call `st.foo` commands from other threads - at least in production code that needs to be stable.)\n\n---\n\nCommunity voting on feature requests enables the Streamlit team to understand which",
+    "url": "https://github.com/streamlit/streamlit/issues/1326",
+    "reactions": 45,
+    "commentaires": 34,
+    "labels": [
+      "type:enhancement",
+      "area:backend",
+      "area:threading/processing"
+    ],
+    "cree_le": "2020-04-08"
+  },
+  {
+    "id": 744,
+    "titre": "RuntimeError: There is no current event loop in thread error with Streamlit and Asyncio",
+    "description": "# Summary\r\nI am running pyppeteer, which depends on asyncio, to load data which is only available in a rendered web page.  I experienced an error earlier with Jupyter, which depends on tornado, and where I received an error that `RuntimeError: This event loop is already running`. The reason is that tornado was reworked with asyncio and there didn't seem to be a realistic workaround by the Jupyter developers.  The issue was solved with this library [nest_asyncio](https://github.com/erdewit/nest_asyncio).  Whether I include nest_asyncio or not,  I receive the error `RuntimeError: There is no current event loop in thread 'ScriptRunner.scriptThread'`.\r\n\r\n# Steps to reproduce\r\nWhat are the steps we should take to reproduce the bug:\r\n\r\n1. Initializing the RenderHTML class in the following imported file, will cause the error to be outputted as an error to the Streamlit UI.\r\n\r\n```\r\nimport asyncio\r\nimport nest_asyncio\r\n#nest_asyncio.apply()\r\nfrom pyppeteer import launch\r\n\r\nclass HTMLMissing(Exception):\r\n    '''An exception for a missing or invalid HTML.'''\r\n    pass\r\n\r\nclass RenderHTML():\r\n\r\n    def __init__(self, html=None):\r\n        self.html = \"\"\r\n        self.set_html(html)\r\n        asy",
+    "url": "https://github.com/streamlit/streamlit/issues/744",
+    "reactions": 11,
+    "commentaires": 33,
+    "labels": [
+      "type:enhancement",
+      "area:server",
+      "area:threading/processing"
+    ],
+    "cree_le": "2019-11-25"
+  },
+  {
+    "id": 5370,
+    "titre": "Display multiindex dataframe as “sparsified” table",
+    "description": "### Problem\n\nI'm always frustrated when I am trying to display the multiindex dataframe, but it is not readable\n\n### Solution\n\n`pandas` when displaying a dataframe that have multiindex skips duplicate values to make the console output a bit easier on the eyes.\n```pycon\n>>> import pandas as pd\n>>> import numpy as np\n>>>\n>>> tuples = list(\n...     zip(\n...         *[\n...             [\"bar\", \"bar\", \"baz\", \"baz\", \"foo\", \"foo\", \"qux\", \"qux\"],\n...             [\"one\", \"two\", \"one\", \"two\", \"one\", \"two\", \"one\", \"two\"],\n...         ]\n...     )\n... )\n>>> index = pd.MultiIndex.from_tuples(tuples, names=[\"first\", \"second\"])\n>>> df = pd.DataFrame(np.random.randn(8, 2), index=index, columns=[\"A\", \"B\"])\n>>> df\n                     A         B\nfirst second\nbar   one    -0.883183  0.480221\n      two     0.861466 -0.659678\nbaz   one    -0.039308  0.116815\n      two     0.139792  0.787177\nfoo   one     1.638924 -0.135970\n      two     0.408906  0.394975\nqux   one    -0.467613 -0.239692\n      two     1.315613  0.867033\n```\nI think it's worth the `st.table` command to work in a similar way. Currently the table is displayed as below:\n![Screenshot 2022-09-19 at 12 29 18](https://user-images.githubusercont",
+    "url": "https://github.com/streamlit/streamlit/issues/5370",
+    "reactions": 138,
+    "commentaires": 32,
+    "labels": [
+      "type:enhancement",
+      "feature:st.dataframe",
+      "feature:st.table",
+      "upstream"
+    ],
+    "cree_le": "2022-09-19"
+  },
+  {
+    "id": 2820,
+    "titre": "Duplication of ghost app elements ",
+    "description": "# Summary\n\nThe UI elements are not properly cleaned and can become duplicated.\n\n# Steps to reproduce\n\nCan't trace to some specific actions. \n\n## Expected behavior:\n\nThe duplicated old elements should be deleted. \n\n## Actual behavior:\n![Screenshot from 2021-02-19 13-35-48](https://user-images.githubusercontent.com/14186470/108505669-0ba76200-72b8-11eb-944f-7f8151506af1.png)\n\n## Is this a regression?\n\nNo\n\n# Debug info\n\n- Streamlit version: 0.74.1\n- Browser version: Chrome Version 88.0.4324.146\n\n![Views](https://api.views-badge.org/badge/st-issue-2820)\n\n",
+    "url": "https://github.com/streamlit/streamlit/issues/2820",
+    "reactions": 20,
+    "commentaires": 30,
+    "labels": [
+      "type:enhancement",
+      "area:frontend"
+    ],
+    "cree_le": "2021-02-19"
+  },
+  {
+    "id": 268,
+    "titre": "Forward stdout to some widget",
+    "description": "### Problem\n\nI tried to use streamlit for the interactive clustering app.\nIn my case clustering is long. And the only way to see any progress is to use `verbose=1`. In such a case, sklearn algorithm put some information to stdout.\nBut I see no possibility to show this information with streamlit.\n\n---\n\nCommunity voting on feature requests enables the Streamlit team to understand which features are most important to our users.\n\n**If you'd like the Streamlit team to prioritize this feature request, please use the 👍 (thumbs up emoji) reaction in response to the initial post.**\n\n![Views](https://api.views-badge.org/badge/st-issue-268)",
+    "url": "https://github.com/streamlit/streamlit/issues/268",
+    "reactions": 24,
+    "commentaires": 25,
+    "labels": [
+      "type:enhancement",
+      "area:widgets",
+      "type:possible-component",
+      "status:unlikely"
+    ],
+    "cree_le": "2019-10-04"
+  },
+  {
+    "id": 7074,
+    "titre": "404 health check when navigating directly to a subpage",
+    "description": "### Checklist\n\n- [X] I have searched the [existing issues](https://github.com/streamlit/streamlit/issues) for similar issues.\n- [X] I added a very descriptive title to this issue.\n- [X] I have provided sufficient information below to help reproduce this issue.\n\n### Summary\n\nOn multiple page applications, when navigating directly to a subpage, the healthcheck and allowed message origins check is issued twice.\r\nhttps://doc-mpa-hello.streamlit.app/Mapping_Demo?utm_medium=oembed page will receive 404 on the following\r\nhttps://doc-mpa-hello.streamlit.app/~/+/Mapping_Demo/_stcore/health\r\nhttps://doc-mpa-hello.streamlit.app/~/+/Mapping_Demo/_stcore/allowed-message-origins\r\nand 200 OK on \r\nhttps://doc-mpa-hello.streamlit.app/~/+/_stcore/health\r\nhttps://doc-mpa-hello.streamlit.app/~/+/_stcore/allowed-message-origins\r\n\r\n\r\n\n\n### Reproducible Code Example\n\n_No response_\n\n### Steps To Reproduce\n\n1. Go to https://doc-mpa-hello.streamlit.app/Mapping_Demo?utm_medium=oembed with the network inspector open\r\n2. Review the _stcore network calls made\n\n### Expected Behavior\n\nExpected to only see the 200 OK requests and those 404 requests to never be made.\n\n### Current Behavior\n\nCurrently see two 404 req",
+    "url": "https://github.com/streamlit/streamlit/issues/7074",
+    "reactions": 25,
+    "commentaires": 23,
+    "labels": [
+      "type:enhancement",
+      "feature:multipage-apps",
+      "area:server"
+    ],
+    "cree_le": "2023-07-26"
+  },
+  {
+    "id": 5849,
+    "titre": "Bring your own Redis cache",
+    "description": "### Problem\n\nOur micro-service hosting platform will auto-scale a service so that multiple instances are created or destroyed to adapt to varying traffic load. A user request might be routed to any one of these instances, as they are assumed to be stateless. However, our Streamlit dashboard service is not stateless due to the way session state and caches are implemented.\n\nAt the moment each instance of the service has its own Streamlit cache, which means users will often get a cache hit that’s followed immediately by a miss when their next request gets routed to another instance. We also get problems with session state not being mirrored across instances.\n\n### Solution\n\nOur platform provides Redis resources that are shared between instances so that to users there appears to be a single cache (rather than one per instance). What I want to do is to tell Streamlit to use this shared Redis resource as the cache, also using it to store session state.\n\n### Additional context\n\nWe are not using Streamlit Cloud because we have our own PaaS that runs on AWS, so we want our Streamlit services to run there in order to comply with security policies for internal tools like dashboards. \n\n---\n\nCom",
+    "url": "https://github.com/streamlit/streamlit/issues/5849",
+    "reactions": 97,
+    "commentaires": 23,
+    "labels": [
+      "type:enhancement",
+      "feature:cache",
+      "type:possible-component"
+    ],
+    "cree_le": "2022-12-13"
+  },
+  {
+    "id": 7749,
+    "titre": "[Coming soon] Using st.data_editor with session state, input data \"disappears\": Requires double input to register changes.",
+    "description": "### Checklist\r\n\r\n- [X] I have searched the [existing issues](https://github.com/streamlit/streamlit/issues) for similar issues.\r\n- [X] I added a very descriptive title to this issue.\r\n- [X] I have provided sufficient information below to help reproduce this issue.\r\n\r\n### Summary\r\n\r\nThis issue is practically the same as this closed issue: #7354\r\nBut since it is closed (due to the user not really needing the particular use case) I have opened this new one with another simple minimum reproducible example.\r\n\r\n### Reproducible Code Example\r\n\r\n[![Open in Streamlit Cloud](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://issues.streamlitapp.com/?issue=gh-7749)\r\n\r\n```Python\r\nimport streamlit as st\r\nimport pandas as pd\r\n\r\n# using session state, works ever other input:\r\nif \"df\" not in st.session_state:\r\n    st.session_state.df = pd.DataFrame({\"In\":[0,1,2],\"Out\":[0,0,0]})\r\nst.session_state.df = st.data_editor(st.session_state.df)\r\nst.session_state.df[\"Out\"] = st.session_state.df[\"In\"]**2\r\nst.write(st.session_state.df)\r\n\r\n# # works every input but the df is not updated in data_editor:\r\n# df = pd.DataFrame({\"In\":[0,1,2],\"Out\":[0,0,0]})\r\n# df = st.data_editor(df)\r\n# df",
+    "url": "https://github.com/streamlit/streamlit/issues/7749",
+    "reactions": 89,
+    "commentaires": 22,
+    "labels": [
+      "type:enhancement",
+      "status:confirmed",
+      "feature:st.data_editor"
+    ],
+    "cree_le": "2023-11-23"
+  },
+  {
+    "id": 662,
+    "titre": "Add option to run modules",
+    "description": "### Problem\n\nStreamlit can run a report via a Python file specified by file path or URL. I would like to be able to specify a report that is contained in a Python module.\n\n### Solution\n\n**MVP:** PR #79 has an implementation that's currently paused. Since then, PR #477 has renamed the main argument for `streamlit run` from `file_or_url` to `target`. The new argument is generic enough to adapt modules to.\n\nA custom Click type can be created for the `target` CLI argument that handles files, urls, or modules. The existing code in PR #79 can be adapted into this.\n\n**Possible additions:** The `target` argument could be further extended to support multiple reports (#543).\n\n**Preferred solution:** The MVP. Start with encapsulating the existing file or url handling code in a Click type, and add module support.\n\n### Additional context\n\nCreating this issue to describe the existing work in PR #79. \n\n![Views](https://api.views-badge.org/badge/st-issue-662)",
+    "url": "https://github.com/streamlit/streamlit/issues/662",
+    "reactions": 41,
+    "commentaires": 22,
+    "labels": [
+      "type:enhancement",
+      "feature:cli"
+    ],
+    "cree_le": "2019-11-09"
+  },
+  {
+    "id": 612,
+    "titre": "Enable Google Analytics or any kind of traffic tracking tools requires some Javascript",
+    "description": "### Problem\n\nI would like to track the traffic with Google Analytic however I cannot find a way to inject the script tag\n\n### Solution\n\nIt would be greate if there are direct function call to hook it with Google Analytic or just some hacky solution to add script tag.\n\n---\n\nCommunity voting on feature requests enables the Streamlit team to understand which features are most important to our users.\n\n**If you'd like the Streamlit team to prioritize this feature request, please use the 👍 (thumbs up emoji) reaction in response to the initial post.**\n\n![Views](https://api.views-badge.org/badge/st-issue-612)\n",
+    "url": "https://github.com/streamlit/streamlit/issues/612",
+    "reactions": 27,
+    "commentaires": 21,
+    "labels": [
+      "type:enhancement",
+      "type:possible-component",
+      "area:integrations"
+    ],
+    "cree_le": "2019-11-03"
+  },
+  {
+    "id": 2463,
+    "titre": "Support choosing an entire month in date picker",
+    "description": "Ref: https://discuss.streamlit.io/t/month-picker-only/7932\n\nIt would be great if you could choose an entire month from the date picker, as shown by the following picture\n\n![image](https://user-images.githubusercontent.com/2762787/102093366-11338800-3def-11eb-9557-f1e84dd8514d.png)\n\n---\n\nCommunity voting on feature requests enables the Streamlit team to understand which features are most important to our users.\n\n**If you'd like the Streamlit team to prioritize this feature request, please use the 👍 (thumbs up emoji) reaction in response to the initial post.**\n\n![Views](https://api.views-badge.org/badge/st-issue-2463)",
+    "url": "https://github.com/streamlit/streamlit/issues/2463",
+    "reactions": 68,
+    "commentaires": 20,
+    "labels": [
+      "type:enhancement",
+      "feature:st.date_input",
+      "type:possible-component",
+      "status:unlikely"
+    ],
+    "cree_le": "2020-12-14"
+  },
+  {
+    "id": 9405,
+    "titre": "st.dialog Does Not Close Immediately After User Action if Followed by Blocking Operation (e.g. time.sleep(15))",
+    "description": "### Checklist\n\n- [X] I have searched the [existing issues](https://github.com/streamlit/streamlit/issues) for similar issues.\n- [X] I added a very descriptive title to this issue.\n- [X] I have provided sufficient information below to help reproduce this issue.\n\n### Summary\n\nWhen using `st.dialog` to collect feedback from a user, if the feedback submission is followed by a blocking operation (e.g., `time.sleep(15)`), the dialog's title remains visible on the screen until the blocking operation is complete. This creates a poor user experience because the user may expect the dialog to disappear immediately after submitting their input, but the dialog remains visible until the blocking operation finishes.\r\n\n\n### Reproducible Code Example\n\n```Python\nimport time\r\nimport streamlit as st\r\n\r\n@st.dialog(\"Cast your vote\")\r\ndef vote(item):\r\n    st.write(f\"Why is {item} your favorite?\")\r\n    reason = st.text_input(\"Because...\")\r\n    if st.button(\"Submit\"):\r\n        st.session_state.vote = {\"item\": item, \"reason\": reason}\r\n        st.rerun()\r\n\r\nif \"vote\" not in st.session_state:\r\n    st.write(\"Vote for your favorite\")\r\n\r\n    if st.button(\"A\"):\r\n        vote(\"A\")\r\n    if st.button(\"B\"):\r\n        ",
+    "url": "https://github.com/streamlit/streamlit/issues/9405",
+    "reactions": 21,
+    "commentaires": 19,
+    "labels": [
+      "type:enhancement",
+      "status:confirmed",
+      "feature:st.dialog"
+    ],
+    "cree_le": "2024-09-05"
+  },
+  {
+    "id": 8511,
+    "titre": "Rerun fragment only programatically with `st.fragment` instead of `run_every`",
+    "description": "### Checklist\n\n- [X] I have searched the [existing issues](https://github.com/streamlit/streamlit/issues) for similar feature requests.\n- [X] I added a descriptive title and summary to this issue.\n\n### Summary\n\nI love experimental_fragment but I really wish there was a function like `st.fragment_rerun` or something that allowed you to check for certain conditions on which to rerun that fragment on. Right now you can only do it every n seconds, and if you put a while loop to stop reruns it doesn't stop the reruns from just piling up in the queue (or at least I think that's what's going on). \r\n\r\nAlternatively you can run `st.rerun` under a condition and just rerun the whole script but that's quite heavy handed when the point of fragments is to isolate reruns.\n\n### Why?\n\n_No response_\n\n### How?\n\n_No response_\n\n### Additional Context\n\n_No response_",
+    "url": "https://github.com/streamlit/streamlit/issues/8511",
+    "reactions": 34,
+    "commentaires": 19,
+    "labels": [
+      "type:enhancement",
+      "feature:st.fragment"
+    ],
+    "cree_le": "2024-04-16"
+  },
+  {
+    "id": 6272,
+    "titre": "Add capability to filter columns in `st.data_editor` via UI",
+    "description": "It would be nice if in the experimental data editor header columns allow filtering, similar to excel.  It's common for users to want to filter data when the data is displayed in the edior.\n\n### Problem\n\nOnce a dataframe is displayed, there is no way to easily filter by a given column.\n\n### Solution\n\nThe ability to filter each individual column.\n\n---\n\nCommunity voting on feature requests enables the Streamlit team to understand which features are most important to our users.\n\n**If you'd like the Streamlit team to prioritize this feature request, please use the 👍 (thumbs up emoji) reaction in response to the initial post.**\n\n![Views](https://api.views-badge.org/badge/st-issue-6272)\n\n",
+    "url": "https://github.com/streamlit/streamlit/issues/6272",
+    "reactions": 66,
+    "commentaires": 19,
+    "labels": [
+      "type:enhancement",
+      "feature:st.data_editor"
+    ],
+    "cree_le": "2023-03-08"
+  },
+  {
+    "id": 3601,
+    "titre": "on_change not called for first session_state value",
+    "description": "### Summary\n\nStreamlit 0.84 introduces an [`on_change` callback](https://docs.streamlit.io/en/stable/session_state_api.html#use-callbacks-to-update-session-state) for some interactive widgets as part of the new Session State API. I've found that the callback is not invoked for the first value (i.e., the widget's default or initial value), only for subsequent values.  \n\n### Steps to reproduce\n\nCode snippet:\n\n```python\nimport streamlit as st\n\ndef colour_changed():\n    st.info(f\"colour_changed: {st.session_state.colour}\")\n\ncolour = st.selectbox(\"Colour\", [\"blue\", \"red\", \"yellow\", \"green\"], key=\"colour\", on_change=colour_changed)\n\nst.info(f\"selectbox returned: {colour}\")\n```\n\n1. When the report is first run, the selectbox returns `blue` as the selected value, but the `colour_changed()` callback is not called.\n2. When a different colour is selected, the selectbox returns the new colour and `colour_changed()` is called.\n \n**Expected behavior:**\n\nI believe the `on_change` callback should be called when a widget sets the initial/default value.\n\nI'm finding that the lack of a callback for the initial value greatly complicates things because I can't depend on the callback to do stuff for eve",
+    "url": "https://github.com/streamlit/streamlit/issues/3601",
+    "reactions": 4,
+    "commentaires": 18,
+    "labels": [
+      "type:enhancement",
+      "feature:state",
+      "feature:st.session_state"
+    ],
+    "cree_le": "2021-07-23"
+  },
+  {
+    "id": 637,
+    "titre": "Specify browser to be opened",
+    "description": "### Problem\n\nAs a user : I want to specify the browser for my Streamlit reports rather than using the OS default\n\n### Solution\n\n**MVP:** \nAdding a config to set the desired browser, For example, Chrome is `google chrome` on macOS, `google-chrome` on Linux and `chrome` on Windows.\nYou may also pass in the app's full path. For example on WSL, this can be `/mnt/c/Program Files (x86)/Google/Chrome/Application/chrome.exe` for the Windows installation of Chrome.\n\n---\n\nCommunity voting on feature requests enables the Streamlit team to understand which features are most important to our users.\n\n**If you'd like the Streamlit team to prioritize this feature request, please use the 👍 (thumbs up emoji) reaction in response to the initial post.**\n\n![Views](https://api.views-badge.org/badge/st-issue-637)\n",
+    "url": "https://github.com/streamlit/streamlit/issues/637",
+    "reactions": 23,
+    "commentaires": 18,
+    "labels": [
+      "type:enhancement",
+      "papercut",
+      "feature:config"
+    ],
+    "cree_le": "2019-11-06"
+  },
+  {
+    "id": 9218,
+    "titre": "file_uploader with large file results in server getting killed",
+    "description": "### Checklist\r\n\r\n- [X] I have searched the [existing issues](https://github.com/streamlit/streamlit/issues) for similar issues.\r\n- [X] I added a very descriptive title to this issue.\r\n- [X] I have provided sufficient information below to help reproduce this issue.\r\n\r\n### Summary\r\n\r\nI am using st.file_uploader to upload ~3.5gb file into my streamlit dashboard. This however, results in the server getting killed.\r\nWhen I inspect using btop, Upon file upload, the server starts using an astronomic amount of RAM.\r\n\r\nEDIT: I tried imposing a RAM limit by dockerizing the dashboard and settting a 4gb RAM limit, but it just gets killed in the container.\r\n\r\n### Reproducible Code Example\r\n\r\n```Python\r\nimport streamlit as st\r\n\r\nuploaded_file = st.file_uploader(\"Choose a video file\", type=[\"mp4\", \"mov\", \"avi\"])\r\n```\r\n\r\n\r\n### Steps To Reproduce\r\n\r\nstreamlit run dashboard.py --maxUploadSize=5000\r\n\r\n### Expected Behavior\r\n\r\nIt's probably better to stream it in chunks to disk when clicking an 'upload file' button.\r\n\r\n### Current Behavior\r\n\r\nThe server gets killed.\r\n\r\n### Is this a regression?\r\n\r\n- [ ] Yes, this used to work in a previous version.\r\n\r\n### Debug info\r\n\r\n- Streamlit version:\r\n- Python v",
+    "url": "https://github.com/streamlit/streamlit/issues/9218",
+    "reactions": 24,
+    "commentaires": 16,
+    "labels": [
+      "type:enhancement",
+      "feature:st.file_uploader"
+    ],
+    "cree_le": "2024-08-06"
+  },
+  {
+    "id": 7123,
+    "titre": "Link redirect",
+    "description": "### Checklist\n\n- [X] I have searched the [existing issues](https://github.com/streamlit/streamlit/issues) for similar feature requests.\n- [X] I added a descriptive title and summary to this issue.\n\n### Summary\n\nSimple redirect, clicked on a conditional button and the user was transferred to another site, page, etc.\n\n### Why?\n\nI will not argue that this function is needed by many. I will describe my problem.\r\n\r\nI have an API with a user DB to access some queries need a token. I want to arrange it in a convenient UI for further user management. Since I decided to make the login separate from the main UI.\r\n\r\nAnd in order for this to work, I need to redirect the user using a link with parameters.\n\n### How?\n\n```python\r\nimport streamlit as st\r\n\r\nst.redirect(\"https://example.com\")\r\n```\n\n### Additional Context\n\n_No response_",
+    "url": "https://github.com/streamlit/streamlit/issues/7123",
+    "reactions": 30,
+    "commentaires": 16,
+    "labels": [
+      "type:enhancement",
+      "type:possible-component",
+      "area:utilities"
+    ],
+    "cree_le": "2023-08-05"
+  },
+  {
+    "id": 11845,
+    "titre": "Add back support broken emoji shortcodes from before 1.46",
+    "description": "### Checklist\n\n- [x] I have searched the [existing issues](https://github.com/streamlit/streamlit/issues) for similar issues.\n- [x] I added a very descriptive title to this issue.\n- [x] I have provided sufficient information below to help reproduce this issue.\n\n### Summary\n\nHey Streamlit Team, \n\nIt appears that the `1.46.0` release has introduced an issue with the way some emojis get displayed.\n\n\n### Reproducible Code Example\n\n```Python\nimport streamlit as st\n\noption_map = {\n    0: \":flag-gb:\",\n    1: \":flag-ie:\",\n    2: \":flag-de:\",\n    3: \":flag-at:\",\n}\nselection = st.pills(\n    \"Tool\",\n    options=option_map.keys(),\n    format_func=lambda option: option_map[option],\n    selection_mode=\"single\",\n)\nst.write(\n    \"Your selected option: \"\n    f\"{None if selection is None else option_map[selection]}\"\n)\n```\n\n### Steps To Reproduce\n\n```bash\nstreamlit run path/to/file.py\n```\n\n### Expected Behavior\n\nRunning on `1.45.1`:\n<img width=\"201\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/752216b0-b1de-4a11-8fe7-d8195abdd2af\" />\n\n### Current Behavior\n\nRunning on `1.46.0`:\n<img width=\"332\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/fe6c1423-bd52-4a28-99e7-b41dcf961",
+    "url": "https://github.com/streamlit/streamlit/issues/11845",
+    "reactions": 13,
+    "commentaires": 14,
+    "labels": [
+      "type:enhancement",
+      "feature:markdown",
+      "status:unlikely",
+      "upstream"
+    ],
+    "cree_le": "2025-07-02"
+  },
+  {
+    "id": 8760,
+    "titre": "plotly_chart `on_select` not returning anything for an imshow or heatmap",
+    "description": "### Checklist\r\n\r\n- [X] I have searched the [existing issues](https://github.com/streamlit/streamlit/issues) for similar issues.\r\n- [X] I added a very descriptive title to this issue.\r\n- [X] I have provided sufficient information below to help reproduce this issue.\r\n\r\n### Summary\r\n\r\n### Point selection\r\n\r\nIn the example given below:\r\n![image](https://github.com/streamlit/streamlit/assets/37279082/57df5a94-4955-4cc2-a191-5d16cbc69125)\r\n\r\nClicking on this pixel should return the x, y, and color values using the new selection feature added. This seems like it should be the expected behavior for plotly imshow or heatmap figures. \r\n\r\n### Rectangle selection\r\n\r\nIf we specify the ability to draw a rectangle by updating the figure's `dragmode`,  we can draw a rectangle, but no selection is returned:\r\n![image](https://github.com/streamlit/streamlit/assets/37279082/321fd2e6-717f-4c35-9f08-3e79c97d1a97)\r\n\r\n### Summary\r\n\r\nThis would be extremely helpful for being able to annotate images and select regions or locations in an image. \r\n\r\n\r\n### Reproducible Code Example\r\n\r\n[![Open in Streamlit Cloud](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://issues.streamlitapp.co",
+    "url": "https://github.com/streamlit/streamlit/issues/8760",
+    "reactions": 22,
+    "commentaires": 14,
+    "labels": [
+      "type:enhancement",
+      "feature:st.plotly_chart",
+      "area:events",
+      "upstream"
+    ],
+    "cree_le": "2024-05-24"
+  },
+  {
+    "id": 5889,
+    "titre": "Hierarchical multipage navigation",
+    "description": "### Problem\n\nI'm doing a CRUD app based on streamlit. Most of things work perfect, but as the app grows - there is a need for hierarchical menu to be placed in sidebar. Something like streamlit_options_menu would be perfect to have in Streamlit, but with support of submenus (1 extra level should be enough). Currently I'm using 2x streamlit_options_menu as a workaround, with 1 menu shown below the other, but this doesn't look nice.\n\n### Solution\n\n**MVP:** A menu component with ability to have a tree-like structure with at least 1 level into it. Simple clicking (not radio). Ideally should be able to place it anywhere, like with any normal component (sidebar or main area, or column in main area - with embedded columns in roadmap this could give quite nice formatting options too).\n\n**Possible additions:** I'm interested only in vertical menu, but a top-level menu could be nice, especially if it could be placed at the very top of the page (like sidebar, but top-bar).\n\n**Preferred solution:** -\n\n### Additional context\n\nA screenshot of current workaround with orange arrow where it should really go.\n![image](https://user-images.githubusercontent.com/14203878/209462453-077c151c-ba73-470f-84",
+    "url": "https://github.com/streamlit/streamlit/issues/5889",
+    "reactions": 57,
+    "commentaires": 14,
+    "labels": [
+      "type:enhancement",
+      "feature:multipage-apps"
+    ],
+    "cree_le": "2022-12-25"
+  },
+  {
+    "id": 4457,
+    "titre": "Force widget setting without needing a key",
+    "description": "### Summary\n\nWhen using checkboxes in a streamlit form, the value of the checkbox does not always match it visual state.\n\n### Steps to reproduce\n\nCode snippet:\n\n[![Open in Streamlit Cloud](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://issues.streamlitapp.com/?issue=gh-4457)\n\n```\nimport streamlit as st\n\n\ndefault_checkbox_value = False\nif st.button('Select All'):\n    default_checkbox_value = True\nif st.button('Deselect All'):\n    default_checkbox_value = False\n\ncheckbox_statusses = []\nwith st.form(key='data_approval'):\n    approve_button = st.form_submit_button(label='Do Something')\n\n    for i in range(5):\n        checkbox_statusses.append(st.checkbox('select', key=str(i), value=default_checkbox_value))\n\nif approve_button:\n    if any(checkbox_statusses):\n        st.header('You selected some checkboxes!')\n    else:\n        st.warning('No selectboxes selected!')\n```\n\nIf applicable, please provide the steps we should take to reproduce the bug:\n\n-> State mismatch\n\n1. Click on select all\n2. All checkboxes turn visually active\n3. Press Do Something\n\n-> Result: Warning that no checkboxes were selected\n\n-> Correct state\n\n1. manually check some checkboxes by cli",
+    "url": "https://github.com/streamlit/streamlit/issues/4457",
+    "reactions": 3,
+    "commentaires": 14,
+    "labels": [
+      "type:enhancement",
+      "feature:state",
+      "feature:st.form"
+    ],
+    "cree_le": "2022-02-28"
+  },
+  {
+    "id": 3899,
+    "titre": "Set focus on a widget, e.g. for `st.text_input`",
+    "description": "### Problem\n\nWhen users have to provide data via TextInput elements there should be a way to\nguide them through forms or text fields by activating them on load.\n\nThat way it is possible to e.g. activate elements one after another when a\ncallback function is triggered on button click or text is sent with Enter.\n\n### Solution\n\nAs e.g. with 'autocomplete', the 'TextWidgetsMixin' should forward a parameter 'focus' or 'autofocus'\nto the React component.\n\n---\n\nCommunity voting on feature requests enables the Streamlit team to understand which features are most important to our users.\n\n**If you'd like the Streamlit team to prioritize this feature request, please use the 👍 (thumbs up emoji) reaction in response to the initial post.**\n\n![Views](https://api.views-badge.org/badge/st-issue-3899)\n\n",
+    "url": "https://github.com/streamlit/streamlit/issues/3899",
+    "reactions": 51,
+    "commentaires": 14,
+    "labels": [
+      "type:enhancement",
+      "area:widgets",
+      "area:events"
+    ],
+    "cree_le": "2021-10-12"
+  },
+  {
+    "id": 1353,
+    "titre": "Streamlit should have support for Internationalization (i18n)",
+    "description": "While you obviously can write text in any language you want, the UI elements such as date picker, menu, etc are always in English. Streamlit should support i18n to be more useful to non-English speaking users. \n\nSince the underlying widgets already have support for i18n, it shouldn't be so hard to add it to Streamlit. I am willing to implement it, but I'd rather hear what are your thoughts on that issue and which approaches would you consider. I am willing to implement or help implementing this feature, but I'd like to do it in a way that can be merged in upstream. \n\n---\n\nCommunity voting on feature requests enables the Streamlit team to understand which features are most important to our users.\n\n**If you'd like the Streamlit team to prioritize this feature request, please use the 👍 (thumbs up emoji) reaction in response to the initial post.**\n\n![Views](https://api.views-badge.org/badge/st-issue-1353)",
+    "url": "https://github.com/streamlit/streamlit/issues/1353",
+    "reactions": 157,
+    "commentaires": 14,
+    "labels": [
+      "type:enhancement",
+      "area:utilities",
+      "feature:st.context"
+    ],
+    "cree_le": "2020-04-15"
+  },
+  {
+    "id": 1002,
+    "titre": "Add support for geometry dtype in `st.altair_chart`",
+    "description": "# Summary\n\nI am trying to render an altair chart through `st.altair_chart`. This chart happens to be a map representation of Africa. I constructed this chart through the altair library and wanted to render it in streamlit.\n\n# Steps to reproduce\n\n```python\nimport geopandas as gpd\nimport altair as alt\nimport streamlit as st\n\nworld = gpd.read_file(gpd.datasets.get_path(\"naturalearth_lowres\"))\nafrica = world[world.continent == \"Africa\"]\n\nchart = alt.Chart(africa).mark_geoshape().encode(color=\"pop_est:Q\")\nst.altair_chart(chart)\n```\n\n## Expected behavior:\n\nShould render the image referenced:\n![visualization](https://user-images.githubusercontent.com/26229764/72894124-e80f9200-3d1a-11ea-92db-7d13d2edd104.jpeg)\n\n## Actual behavior:\n\n`Not implemented error: Dtype geometry not understood`\n\n![image](https://user-images.githubusercontent.com/26229764/72894190-09707e00-3d1b-11ea-9b8b-8f2a61423347.png)\n\n\n## Is this a regression?\nThis is not a regression\n\n# Debug info\n\n- Streamlit version: 0.53\n- Python version: 3.8.1\n- Altair version: 4.0.1\n- Geopandas version: 0.6.1\n- Using Conda\n- OS version: Ubuntu 19.10\n- Browser version: Firefox 72.0.1\n\n---\n\nCommunity voting on feature requests enables the ",
+    "url": "https://github.com/streamlit/streamlit/issues/1002",
+    "reactions": 15,
+    "commentaires": 14,
+    "labels": [
+      "type:enhancement",
+      "area:arrow",
+      "feature:st.altair_chart"
+    ],
+    "cree_le": "2020-01-22"
+  }
+]
