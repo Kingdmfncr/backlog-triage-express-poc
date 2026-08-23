@@ -1,5 +1,7 @@
 # Backlog Triage Express — POC
 
+🔗 **Démo live** : [backlog-triage-express-poc.streamlit.app](https://backlog-triage-express-poc.streamlit.app)
+
 ⚠️ **Projet personnel (PoC)**, démonstration de méthode. Données **réelles et publiques** : 30 vraies demandes d'évolution ouvertes du dépôt open-source [streamlit/streamlit](https://github.com/streamlit/streamlit) (label `type:enhancement`), récupérées via l'API publique GitHub (licence des données du dépôt : voir GitHub, contenu public). Aucun backlog client cité — le scénario est générique, inspiré de mon offre `Structuration de backlog produit`.
 
 Je voulais illustrer ce sprint sur un vrai backlog non trié — pas un jeu de données inventé pour l'occasion — alors j'ai utilisé les vraies demandes d'évolution de l'outil même sur lequel tourne tout mon portfolio (Streamlit), un joli clin d'œil au passage.
