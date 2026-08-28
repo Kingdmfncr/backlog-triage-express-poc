@@ -3,6 +3,7 @@
 > Guide opératoire structuré en 4 volets (Définitions / Process / Documentation / Templates),
 > pour comprendre, réutiliser ou transposer ce projet à un contexte réel.
 > Rappel : projet personnel (PoC), voir [`README.md`](README.md).
+> **Dernière mise à jour** : 23/08/2026
 
 ---
 
